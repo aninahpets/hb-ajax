@@ -16,14 +16,19 @@ $('#get-fortune-button').on('click', showFortune);
 
 
 // PART 2: SHOW WEATHER
+function showForecast(weather) {
+    var forecast = weather["forecast"];
+    $("#weather-info").html(forecast);
+    }
 
 function showWeather(evt) {
     evt.preventDefault();
-
-    var url = "/weather?zipcode=" + $("#zipcode-field").val();
+    var zipcodeEntered = $("#zipcode-field").val();
+    var url = "/weather.json";
+    $.get(url, zipcodeEntered, showForecast);
+    }
 
     // TODO: request weather with that URL and show the forecast in #weather-info
-}
 
 $("#weather-form").on('submit', showWeather);
 
